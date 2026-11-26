@@ -27,10 +27,7 @@ export default function EndpointsPage() {
   const [newDevPassword, setNewDevPassword] = useState('Dev@123!');
   const [devFormLoading, setDevFormLoading] = useState(false);
 
-  const currentUserEmail = localStorage.getItem('email') || 'User';
   const currentRole = localStorage.getItem('role') || 'DEVELOPER';
-  const currentDevCode = localStorage.getItem('developerCode');
-  const currentManagerEmail = localStorage.getItem('managerEmail');
 
   const isManager = currentRole === 'MANAGER';
 
@@ -179,36 +176,17 @@ export default function EndpointsPage() {
           <svg className="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
           </svg>
-          <div>
-            <span className="brand-title">APIVitals</span>
-            <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>
-              {isManager ? 'Manager Workspace' : 'Developer Workspace'}
-            </div>
-          </div>
+          <span className="brand-title">APIVitals</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '0.875rem', fontWeight: 600, color: '#0f172a' }}>
-              {currentDevCode ? (
-                <span>ID: <code style={{ color: '#2563eb', background: '#eff6ff', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>{currentDevCode}</code> ({currentUserEmail})</span>
-              ) : (
-                <span>{currentUserEmail}</span>
-              )}
-            </div>
-            <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.15rem' }}>
-              {isManager ? (
-                <span className="badge" style={{ background: '#dbeafe', color: '#1e40af' }}>MANAGER</span>
-              ) : (
-                <span>
-                  <span className="badge badge-neutral">DEVELOPER</span>
-                  {currentManagerEmail && ` • Reports to: ${currentManagerEmail}`}
-                </span>
-              )}
-            </div>
-          </div>
-          <button className="secondary small" onClick={handleLogout}>Log Out</button>
-        </div>
+        <button className="secondary small" onClick={handleLogout} style={{ gap: '0.4rem' }}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          Log Out
+        </button>
       </header>
 
       {error && <div className="card" style={{ background: '#fee2e2' }}><p className="error">{error}</p></div>}
